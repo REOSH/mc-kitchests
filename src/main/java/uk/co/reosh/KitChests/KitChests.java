@@ -19,20 +19,23 @@
 
 package uk.co.reosh.KitChests;
 
+import java.io.File;
 import java.util.logging.Logger;
 
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import uk.co.reosh.KitChests.DB.KCDatabase;
 
 public class KitChests extends JavaPlugin {
 	
 	public final Logger logger = Logger.getLogger("Minecraft");
+	public static KCDatabase database = null;
 	
 	public void onEnable() {
-		PluginManager pm = getServer().getPluginManager();
 	    this.saveDefaultConfig();
-		PluginDescriptionFile pdfile = this.getDescription();
+	    
+		database = new KCDatabase(this, this.getDataFolder().getAbsolutePath() + File.separator + "chests.db");
+		database.verifyDatabase();
 	}
 }
 		
