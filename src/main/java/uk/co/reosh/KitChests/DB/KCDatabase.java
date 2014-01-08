@@ -65,18 +65,18 @@ public class KCDatabase {
 			
 			// Create table "CHESTS"
 			String sql = "CREATE TABLE CHESTS "
-					+ "(ID INT PRIMARY KEY     NOT NULL AUTO_INCREMENT,"
-					+ " X              INT     NOT NULL,"
-					+ " Y              INT     NOT NULL,"
-					+ " Z              INT     NOT NULL,"
-					+ " KIT			   TEXT    NOT NULL)";
+					   + "(ID INT PRIMARY KEY     NOT NULL AUTO_INCREMENT,"
+					   + " X              INT     NOT NULL,"
+					   + " Y              INT     NOT NULL,"
+				       + " Z              INT     NOT NULL,"
+					   + " KIT			   TEXT    NOT NULL)";
 			stmt.executeUpdate(sql);
 			
 			// Create table "KITS"
 			sql = "CREATE TABLE KITS "
-					+ "(ID INT PRIMARY KEY     NOT NULL,"
-					+ " NAME           TEXT    NOT NULL,"
-					+ " ITEMS          TEXT    NOT NULL)";
+				+ "(ID INT PRIMARY KEY     NOT NULL,"
+				+ " NAME           TEXT    NOT NULL,"
+				+ " ITEMS          TEXT    NOT NULL)";
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public class KCDatabase {
 		try {
 			Statement stmt;
 			stmt = c.createStatement();
-			String sql = "INSERT INTO COMPANY (X, Y, Z, KIT) " +
+			String sql = "INSERT INTO CHESTS (X, Y, Z, KIT) " +
 						 "VALUES (" + chest.getLocation().getBlockX() + ", " + chest.getLocation().getBlockY() + ", " + chest.getLocation().getBlockZ() + ", '" + chest.getKit() + "'" + ");"; 
 			stmt.executeUpdate(sql);
 			return true;
