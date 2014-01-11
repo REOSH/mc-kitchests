@@ -22,6 +22,7 @@ package uk.co.reosh.KitChests.DB;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -57,6 +58,7 @@ public class KCDatabase {
 			createDatabase();
 		}
 	}
+	
 	private void createDatabase() {
 		Statement stmt;
 		
@@ -65,19 +67,13 @@ public class KCDatabase {
 			
 			// Create table "CHESTS"
 			String sql = "CREATE TABLE CHESTS "
-					   + "(ID INT PRIMARY KEY     NOT NULL AUTO_INCREMENT,"
-					   + " X              INT     NOT NULL,"
-					   + " Y              INT     NOT NULL,"
-				       + " Z              INT     NOT NULL,"
-					   + " KIT			   TEXT    NOT NULL)";
+					   + "(ID      INTEGER PRIMARY KEY 	  NOT NULL,"
+					   + " X  	   INT     				  NOT NULL,"
+					   + " Y       INT     				  NOT NULL,"
+				       + " Z       INT    				  NOT NULL,"
+					   + " KIT	   TEXT   				  NOT NULL)";
 			stmt.executeUpdate(sql);
 			
-			// Create table "KITS"
-			sql = "CREATE TABLE KITS "
-				+ "(ID INT PRIMARY KEY     NOT NULL,"
-				+ " NAME           TEXT    NOT NULL,"
-				+ " ITEMS          TEXT    NOT NULL)";
-			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,11 +83,18 @@ public class KCDatabase {
 
 	public boolean addChest(KCChest chest) {
 		try {
-			Statement stmt;
-			stmt = c.createStatement();
 			String sql = "INSERT INTO CHESTS (X, Y, Z, KIT) " +
-						 "VALUES (" + chest.getLocation().getBlockX() + ", " + chest.getLocation().getBlockY() + ", " + chest.getLocation().getBlockZ() + ", '" + chest.getKit() + "'" + ");"; 
-			stmt.executeUpdate(sql);
+						 "VALUES (?, ?, ?, ?);"; 
+			
+			PreparedStatement preparedStatement = c.prepareStatement(sql);
+			
+			preparedStatement.setInt(1, chest.getLocation().getBlockX());
+			preparedStatement.setInt(2, chest.getLocation().getBlockY());
+			preparedStatement.setInt(3, chest.getLocation().getBlockZ());
+			preparedStatement.setString(4, chest.getKit());
+			preparedStatement.addBatch();
+			
+			preparedStatement.executeBatch();
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();

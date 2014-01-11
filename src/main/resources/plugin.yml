@@ -1,4 +1,7 @@
 name: KitChests
 main: uk.co.reosh.KitChests.KitChests
 version: ${project.version}
+author: REOSH Group <cross@reosh.co.uk>
+website: http://reosh.co.uk/
 description: A Bukkit plugin that allows you to create chests with items that will respawn over time.
+depend: [WorldEdit]

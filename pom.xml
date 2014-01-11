@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>KitChests</groupId>
 	<artifactId>KitChests</artifactId>
-	<version>0.1-alpha.0</version>
 	<name>KitChests</name>
 	<packaging>jar</packaging>
 	<url>https://github.com/REOSH/mc-kitchests/</url>
@@ -57,8 +56,15 @@
 				<includes>
 					<include>plugin.yml</include>
 					<include>config.yml</include>
+					<include>kits.yml</include>
 				</includes>
 			</resource>
 		</resources>
 	</build>
+	<version>1.1.2-ALPHA</version>
+	<description>A Bukkit plugin that allows you to create chests with items that will respawn over time.</description>
+	<organization>
+		<name>REOSH</name>
+		<url>http://reosh.co.uk/</url>
+	</organization>
 </project>
